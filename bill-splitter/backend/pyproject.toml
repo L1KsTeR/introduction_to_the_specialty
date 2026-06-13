@@ -1,0 +1,8 @@
+[tool.ruff]
+line-length = 88
+target-version = "py38"
+select = ["E", "F", "W", "I"]  # Ошибки + импорты
+
+[tool.black]
+line-length = 88
+target-version = ["py38"]
