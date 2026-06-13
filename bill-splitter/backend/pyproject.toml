@@ -1,7 +1,9 @@
 [tool.ruff]
 line-length = 88
 target-version = "py38"
-select = ["E", "F", "W", "I"]  # Ошибки + импорты
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I"]
 
 [tool.black]
 line-length = 88
