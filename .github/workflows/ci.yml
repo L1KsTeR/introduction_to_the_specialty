@@ -35,5 +35,8 @@ jobs:
       - name: 🎨 Check formatting with Black
         run: black . --check --diff
 
+      - name: 🧪 Run tests with pytest
+        run: pytest tests/ -v
+
       - name: ✅ Syntax check (import test)
         run: python -m py_compile app.py logic.py validators.py
