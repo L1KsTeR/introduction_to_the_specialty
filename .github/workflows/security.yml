@@ -1,0 +1,33 @@
+name: Security Scan
+
+on:
+  pull_request:
+    branches: [ main ]
+  push:
+    branches: [ main ]
+
+jobs:
+  bandit:
+    name: Bandit Security Analysis
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: bill-splitter/backend
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🐍 Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+
+      - name: 📦 Install Bandit
+        run: pip install bandit
+
+      - name: 🔒 Run Bandit security scan
+        run: bandit -r . -ll --exclude ./venv,./tests,./__pycache__,./.pytest_cache
+
+      - name: 📋 Show findings
+        run: bandit -r . -ll
