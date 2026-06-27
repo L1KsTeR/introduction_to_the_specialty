@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Разделение счёта</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>💰 Калькулятор счёта</h1>
+        <form id="splitForm">
+            <label>Сумма счёта (₽): <input type="number" id="bill" step="0.01" min="0.01" required></label>
+            <label>Чаевые (%): <input type="number" id="tip" step="0.1" min="0" value="10" required></label>
+            <label>Кол-во человек: <input type="number" id="people" min="1" value="2" required></label>
+            <button type="submit">Рассчитать</button>
+        </form>
+
+        <div id="result" class="hidden"></div>
+        <div id="error" class="hidden"></div>
+    </div>
+    <script src="/static/script.js"></script>
+</body>
+</html>

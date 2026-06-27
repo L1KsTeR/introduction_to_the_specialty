@@ -1,0 +1,42 @@
+name: CI Pipeline
+
+on:
+  pull_request:
+    branches: [ main ]
+  push:
+    branches: [ main ]
+
+jobs:
+  quality-check:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: bill-splitter/backend
+
+    steps:
+      - name: 📥 Checkout code
+        uses: actions/checkout@v4
+
+      - name: 🐍 Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.13'
+          cache: 'pip'
+          cache-dependency-path: bill-splitter/backend/requirements*.txt
+
+      - name: 📦 Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements-dev.txt
+
+      - name: 🔍 Lint with Ruff
+        run: ruff check . --output-format=github
+
+      - name: 🎨 Check formatting with Black
+        run: black . --check --diff
+
+      - name: 🧪 Run tests with pytest
+        run: pytest tests/ -v
+
+      - name: ✅ Syntax check (import test)
+        run: python -m py_compile app.py logic.py validators.py
